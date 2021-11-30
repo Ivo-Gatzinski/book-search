@@ -14,7 +14,7 @@ type User {
     username: String
     email: String
     password: String
-    Book: [Book]
+    savedBooks: [Book]
   }
 
   type Auth {
