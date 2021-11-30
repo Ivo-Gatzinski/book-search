@@ -35,6 +35,9 @@ const resolvers = {
 
       return { token, user };
     }
+    // TODO: define typeDef and resolver to remove a book
+//  TODO: define typeDef and resolver to add a book
+ 
   },
 };
 
