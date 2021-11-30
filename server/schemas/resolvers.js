@@ -38,11 +38,11 @@ const resolvers = {
 
     //  TODO: define typeDef and resolver to add a book
     
-    saveBook: async (parent, {bookId}, context) => {
+    saveBook: async (parent, {newbook}, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedBooks: bookId } },
+          { $addToSet: { savedBooks: newbook } },
           { new: true, runValidators: true }
         );
         return updatedUser;
@@ -53,7 +53,7 @@ const resolvers = {
     
     // TODO: define typeDef and resolver to remove a book
 
-    deleteBook: async (parent, {bookId}, context) => {
+    removeBook: async (parent, {bookId}, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndDelete(
           { _id: context.user._id },
