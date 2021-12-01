@@ -15,12 +15,13 @@ import { GET_ME } from "../utils/queries";
 import { REMOVE_BOOK } from "../utils/mutations";
 
 const SavedBooks = () => {
+  const [getMe, {error1}] = useQuery(GET_ME);
   const [userData, setUserData] = useState({});
 
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
 
-  const [getMe, { error1 }] = useQuery(GET_ME);
+  
 
   
     const getUserData = async () => {
@@ -31,16 +32,16 @@ const SavedBooks = () => {
           return false;
         }
 
-        const response = await getMe({
+        const user = await getMe({
           variables: { token },
         });
 
-        if (!response.ok) {
+        if (!user) {
           throw new Error(error1);
         }
 
-        const user = await response;
-        setUserData(user);
+        const userData = await user;
+        setUserData(userData);
       } catch (err) {
         console.error(err);
       }
