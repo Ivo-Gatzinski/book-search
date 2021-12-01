@@ -18,7 +18,7 @@ const LoginForm = () => {
     setUserFormData({ ...userFormData, [name]: value });
   };
 
-  const response = loginUser({variables: {...userFormData}});
+  
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -31,7 +31,7 @@ const LoginForm = () => {
     }
 
     try {
-      
+      const response = await loginUser({variables: {...userFormData}});
 
       if (!response) {
         throw new Error(error);
