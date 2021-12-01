@@ -30,11 +30,11 @@ const SavedBooks = () => {
     }
 
     try {
-      const userData = await deleteBook({
+      const noBook = await deleteBook({
         variables: { bookId },
       });
 
-      if (!userData) {
+      if (!noBook) {
         throw new Error(error);
       }
       // upon success, remove book's id from localStorage
@@ -57,14 +57,14 @@ const SavedBooks = () => {
       </Jumbotron>
       <Container>
         <h2>
-          {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${
-                userData.savedBooks.length === 1 ? "book" : "books"
+          {userData.length
+            ? `Viewing ${userData.length} saved ${
+                userData.length === 1 ? "book" : "books"
               }:`
             : "You have no saved books!"}
         </h2>
         <CardColumns>
-          {userData.savedBooks.map((book) => {
+          {userData.map((book) => {
             return (
               <Card key={book.bookId} border="dark">
                 {book.image ? (
