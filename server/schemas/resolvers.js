@@ -50,15 +50,14 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
       
     },
-    
-    // TODO: define typeDef and resolver to remove a book
 
     removeBook: async (parent, {bookId}, context) => {
+      console.log(bookId);
       if (context.user) {
-        const updatedUser = await User.findOneAndDelete(
+        const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedBooks: bookId } },
-          { new: true, runValidators: true }
+          { $pull: { savedBooks: bookId } },
+          { new: true }
         );
         return updatedUser;
       }
